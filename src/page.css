@@ -16,3 +16,21 @@ h1 {
 .page__column p {
   margin: 0.75em;
 }
+
+.sidebar {
+  background: #6585cf;
+  color: white;
+  width: 300px;
+  height: inherit;
+}
+
+.sidebar__section {
+  padding: 0.5em 0.75em;
+  border-bottom: white solid 1px;
+}
+
+@media print{
+  .sidebar {
+    display: none;
+  }
+}

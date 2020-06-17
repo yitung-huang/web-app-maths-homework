@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import './page.css';
 
+import Sidebar from './components/Sidebar.js';
+
 let questions = [];
 
 let NUM_COLUMNS = 2;
@@ -42,6 +44,7 @@ for (let i = 0; i < NUM_COLUMNS; i++){
 function App() {
   return (
     <div className="App">
+      <Sidebar />
       <section>
         <h1>Multiplication</h1>
         <div className="page">
