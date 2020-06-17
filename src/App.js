@@ -15,10 +15,14 @@ function randInt(min, max){
   return min + Math.round( Math.random() * range );
 }
 
+function generateMultiplication( min, max ){
+  return randInt( min, max ) + " × " + randInt( min, max ) + " = ";
+}
+
 for (let i = 0; i < NUM_COLUMNS; i++){
   questions.push([]);
   for (let j = 0; j < NUM_QUESTIONS_PER_COLUMN; j++){
-    questions[i].push( randInt( MIN, MAX) + " × " + randInt( MIN, MAX ) + " = ");
+    questions[i].push( generateMultiplication( MIN, MAX ) );
   }
 }
 
