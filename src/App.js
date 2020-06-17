@@ -45,8 +45,8 @@ function App() {
   return (
     <div className="App">
       <Sidebar />
-      <section>
-        <h1>Multiplication</h1>
+      <section className="section__display">
+        <h1 className="page__title">Multiplication</h1>
         <div className="page">
           { questions.map(( question_array ) => {
             return (
