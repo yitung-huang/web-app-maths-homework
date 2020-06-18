@@ -2,82 +2,66 @@ import React from 'react';
 import './App.css';
 import './page.css';
 
+import Display from './components/Display.js';
 import Sidebar from './components/Sidebar.js';
-
-let questions = [];
 
 let NUM_COLUMNS = 2;
 let NUM_QUESTIONS_PER_COLUMN = 15;
 
-let MIN = 2;
-let MAX = 6;
-
-function randInt(min, max){
-  let range = max - min;
-  return min + Math.round( Math.random() * range );
-}
-
-function generateMultiplication( min, max ){
-  return randInt( min, max ) + " × " + randInt( min, max ) + " = ";
-}
-
-for (let i = 0; i < NUM_COLUMNS; i++){
-  questions.push([]);
-  for (let j = 0; j < NUM_QUESTIONS_PER_COLUMN; j++){
-    questions[i].push( generateMultiplication( MIN, MAX ) );
+function cloneObject( object ){
+  let newObject = {};
+  for (let key in object){
+    newObject[ key ] = object[ key ];
   }
+
+  return newObject;
 }
 
-let extensions = [];
-let NUM_EXTENSIONS_PER_COLUMN = 5;
+export default class App extends React.Component {
 
-let EXTENSION_MIN = 7;
-let EXTENSION_MAX = 9;
+  constructor(props){
+    super(props);
 
-for (let i = 0; i < NUM_COLUMNS; i++){
-  extensions.push([]);
-  for (let j = 0; j < NUM_EXTENSIONS_PER_COLUMN; j++){
-    extensions[i].push( randInt( EXTENSION_MIN, EXTENSION_MAX) + " × " + randInt( MIN, EXTENSION_MAX ) + " = ");
+    this.state = {
+      document: {
+        title: "Multiplication",
+        columns: NUM_COLUMNS,
+        questions_per_col: NUM_QUESTIONS_PER_COLUMN
+      }
+    };
+
+    this.updateTitle = this.updateTitle.bind(this);
+    this.updateNumQuestions = this.updateNumQuestions.bind(this);
+    this.updateNumColumns = this.updateNumColumns.bind(this);
   }
-}
 
-function App() {
-  return (
-    <div className="App">
-      <Sidebar />
-      <section className="section__display">
-        <h1 className="page__title">Multiplication</h1>
-        <div className="page">
-          { questions.map(( question_array ) => {
-            return (
-              <div className="page__column">
-              {
-                question_array.map((question_str) => {
-                  return <p>{question_str}</p>;
-                })
-              }
-              </div>
-            );
-          })}
-        </div>
-        <hr />
+  updateTitle( title ){
+    let newDocument = cloneObject( this.state.document );
+    newDocument.title = title;
+    this.setState({ document: newDocument });
+  }
 
-        <div className="page">
-        { extensions.map(( question_array ) => {
-          return (
-            <div className="page__column">
-            {
-              question_array.map((question_str) => {
-                return <p>{question_str}</p>;
-              })
-            }
-            </div>
-          );
-        })}
+  updateNumQuestions( num_questions ){
+    let newDocument = cloneObject( this.state.document );
+    newDocument.questions_per_col = num_questions;
+    this.setState({ document: newDocument });
+  }
+
+  updateNumColumns( num_columns ){
+    let newDocument = cloneObject( this.state.document );
+    newDocument.columns = num_columns;
+    this.setState({ document: newDocument });
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <Sidebar document={ this.state.document }
+                 updateTitle={ this.updateTitle }
+                 updateNumQuestions={ this.updateNumQuestions }
+                 updateNumColumns={ this.updateNumColumns }/>
+        <Display document={ this.state.document }/>
       </div>
-      </section>
-    </div>
-  );
+    );
+  }
 }
-
-export default App;
