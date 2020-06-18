@@ -65,9 +65,9 @@ export default class Display extends React.Component {
   render() {
     return (
       <section className="section__display">
-        <div>
+        <div className="page">
           <h1 className="page__title">{ this.props.document.title }</h1>
-          <div className="page">
+          <div className="page__section">
             { this.state.questions.map(( question_array ) => {
               return (
                 <div className="page__column">
@@ -82,7 +82,7 @@ export default class Display extends React.Component {
           </div>
           <hr />
 
-          <div className="page">
+          <div className="page__section">
           { this.state.extensions.map(( question_array ) => {
             return (
               <div className="page__column">
