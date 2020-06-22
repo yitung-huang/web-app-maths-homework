@@ -6,7 +6,7 @@ import Display from './components/Display.js';
 import Sidebar from './components/Sidebar.js';
 
 let NUM_COLUMNS = 2;
-let NUM_QUESTIONS_PER_COLUMN = 15;
+let NUM_QUESTIONS = 30;
 
 function cloneObject( object ){
   let newObject = {};
@@ -26,7 +26,7 @@ export default class App extends React.Component {
       document: {
         title: "Multiplication",
         columns: NUM_COLUMNS,
-        questions_per_col: NUM_QUESTIONS_PER_COLUMN
+        numQuestions: NUM_QUESTIONS
       }
     };
 
@@ -43,8 +43,8 @@ export default class App extends React.Component {
 
   updateNumQuestions( num_questions ){
     let newDocument = cloneObject( this.state.document );
-    newDocument.questions_per_col = num_questions;
-    this.setState({ document: newDocument });
+    newDocument.numQuestions = num_questions;
+    this.setState({ document: newDocument }, function(){ console.log("Document is now: ", newDocument)} );
   }
 
   updateNumColumns( num_columns ){

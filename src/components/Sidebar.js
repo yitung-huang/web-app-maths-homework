@@ -43,7 +43,7 @@ export default class Sidebar extends React.Component {
               <Form.Label>Number of questions</Form.Label>
               <Form.Control type="text"
                             placeholder="Enter number of questions"
-                            defaultValue={ this.props.document.questions_per_col * this.props.document.columns }
+                            defaultValue={ this.props.document.numQuestions }
                             onChange={ this.updateNumQuestions } />
             </Form.Group>
 
