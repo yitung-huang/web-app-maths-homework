@@ -1,17 +1,11 @@
 import React from 'react';
 import QuestionsControl from './QuestionsControl.js';
 
+import Util from './Util.js';
+
 let NUM_COLUMNS = 2;
 let NUM_QUESTIONS = 30;
 
-function cloneObject( object ){
-  let newObject = {};
-  for (let key in object){
-    newObject[ key ] = object[ key ];
-  }
-
-  return newObject;
-}
 
 export default class DocumentControl extends React.Component {
   constructor(props){
@@ -36,21 +30,21 @@ export default class DocumentControl extends React.Component {
   }
 
   updateTitle( title ){
-    let newDocument = cloneObject( this.state.document );
+    let newDocument = Util.cloneObject( this.state.document );
     newDocument.title = title;
     this.setState({ document: newDocument }, ()=> {this.props.updateDocument(newDocument)});
   }
 
   updateNumQuestions( num_questions ){
-    let newDocument = cloneObject( this.state.document );
     newDocument.numQuestions = num_questions;
     this.setState({ document: newDocument }, ()=> {this.props.updateDocument(newDocument)});
+    let newDocument = Util.cloneObject( this.state.document );
   }
 
   updateNumColumns( num_columns ){
-    let newDocument = cloneObject( this.state.document );
     newDocument.columns = num_columns;
     this.setState({ document: newDocument }, ()=> {this.props.updateDocument(newDocument)});
+    let newDocument = Util.cloneObject( this.state.document );
   }
 
   componentDidMount(){
