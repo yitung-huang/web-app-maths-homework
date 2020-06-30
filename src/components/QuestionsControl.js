@@ -27,7 +27,8 @@ export default class QuestionsControl extends React.Component {
       <div className="sidebar__section__content">
         <Form.Group controlId="form__doc__title">
           <Form.Label>Title</Form.Label>
-          <Form.Control type="text"
+          <Form.Control name="document-title"
+                        type="text"
                         placeholder="Enter title of document"
                         defaultValue={ this.props.document.title }
                         onChange={ this.updateTitle } />
@@ -35,7 +36,8 @@ export default class QuestionsControl extends React.Component {
 
         <Form.Group controlId="form__doc__num-questions">
           <Form.Label>Number of questions</Form.Label>
-          <Form.Control type="text"
+          <Form.Control name="num-questions"
+                        type="text"
                         placeholder="Enter number of questions"
                         defaultValue={ this.props.document.numQuestions }
                         onChange={ this.updateNumQuestions } />
@@ -43,7 +45,8 @@ export default class QuestionsControl extends React.Component {
 
         <Form.Group controlId="form__doc__num-columns">
           <Form.Label>Number of columns</Form.Label>
-          <Form.Control type="text"
+          <Form.Control name="num-columns"
+                        type="text"
                         placeholder="Enter number of columns"
                         defaultValue={ this.props.document.columns }
                         onChange={ this.updateNumColumns } />

@@ -6,6 +6,12 @@ import Util from './Util.js';
 let NUM_COLUMNS = 2;
 let NUM_QUESTIONS = 30;
 
+let VALIDATION = {
+  "num-questions":
+    { "BLANK": true, "NAN": true, "FLOAT": true, "BOUND_INCLUSIVE": {min: 2, max: 30} },
+  "num-columns":
+    { "BLANK": true, "NAN": true, "FLOAT": true, "BOUND_INCLUSIVE": {min: 2, max: 4} }
+};
 
 export default class DocumentControl extends React.Component {
   constructor(props){
@@ -32,19 +38,23 @@ export default class DocumentControl extends React.Component {
   updateTitle( title ){
     let newDocument = Util.cloneObject( this.state.document );
     newDocument.title = title;
-    this.setState({ document: newDocument }, ()=> {this.props.updateDocument(newDocument)});
+    this.setState({ document: newDocument }, () => { this.props.updateDocument(newDocument); });
   }
 
   updateNumQuestions( num_questions ){
-    newDocument.numQuestions = num_questions;
-    this.setState({ document: newDocument }, ()=> {this.props.updateDocument(newDocument)});
-    let newDocument = Util.cloneObject( this.state.document );
+    if ( !Util.validateInput( num_questions, VALIDATION["num-questions"] ) ){
+      let newDocument = Util.cloneObject( this.state.document );
+      newDocument.numQuestions = num_questions;
+      this.setState({ document: newDocument }, () => { this.props.updateDocument(newDocument); });
+    }
   }
 
   updateNumColumns( num_columns ){
-    newDocument.columns = num_columns;
-    this.setState({ document: newDocument }, ()=> {this.props.updateDocument(newDocument)});
-    let newDocument = Util.cloneObject( this.state.document );
+    if ( !Util.validateInput( num_columns, VALIDATION["num-columns"] ) ){
+      let newDocument = Util.cloneObject( this.state.document );
+      newDocument.columns = num_columns;
+      this.setState({ document: newDocument }, () => { this.props.updateDocument(newDocument); });
+    }
   }
 
   componentDidMount(){
