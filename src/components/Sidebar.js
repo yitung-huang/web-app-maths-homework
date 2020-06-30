@@ -9,10 +9,9 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <div className="sidebar">
-        <DocumentControl document={ this.props.document }
-                         updateTitle={ this.props.updateTitle }
-                         updateNumQuestions={ this.props.updateNumQuestions }
-                         updateNumColumns={ this.props.updateNumColumns }/>
+        <DocumentControl ref="DocumentControl"
+                         document={ this.props.document }
+                         updateDocument={ this.props.updateDocument } />
       </div>
     );
   }
