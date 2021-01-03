@@ -1,35 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef }  from 'react';
 
-export default class Display extends React.Component {
-  constructor(props){
-    super(props);
-  }
+const A4_PAGE_RATIO = Math.sqrt(2);
 
-  render() {
-    if (this.props.document.questions){
-      return (
-        <section className="section__display">
-          <div className="page">
-            <h1 className="page__title">{ this.props.document.title }</h1>
-            <div className="page__section">
-              { this.props.document.questions.map(( question_array ) => {
-                return (
-                  <div className="page__column">
-                  {
-                    question_array.map((question_str) => {
-                      return <p>{question_str}</p>;
-                    })
-                  }
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      );
-    } else {
-      return null;
+const Display = props => {
+  const { document } = props;
+  const { questions, title } = document;
+
+  const pageRef = useRef(null);
+
+  useEffect(() => {
+    if (pageRef.current) {
+      pageRef.current.style.height = pageRef.clientWidth * A4_PAGE_RATIO + 'px';
     }
+  });
 
+  if (questions){
+    return (
+      <section ref={pageRef} className="section__display">
+        <div className="page">
+          <h1 className="page__title">{ title }</h1>
+          <div className="page__section">
+            { questions.map(( question_array ) => {
+              return (
+                <div className="page__column">
+                {
+                  question_array.map((question_str) => {
+                    return <p>{question_str}</p>;
+                  })
+                }
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+  } else {
+    return null;
   }
 }
+
+export default Display;
